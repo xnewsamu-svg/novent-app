@@ -11,6 +11,7 @@ const publicRoutes = [
   "/api/cron/process-jobs",
   "/api/company/check-name",
   "/api/auth/signup",
+  "/api/debug",
 ]
 
 export function middleware(request: NextRequest) {
