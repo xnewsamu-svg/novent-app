@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getAdminAuth, adminDb } from "@/lib/firebase-admin"
+import { adminDb } from "@/lib/firebase-admin"
 import { handleError } from "@/app/api/_lib/auth"
 
 export async function POST(req: NextRequest) {
@@ -15,17 +15,6 @@ export async function POST(req: NextRequest) {
     if (!uid || !companyName || !businessType || !email) {
       return NextResponse.json(
         { error: "Faltan campos requeridos: uid, companyName, businessType, email" },
-        { status: 400 },
-      )
-    }
-
-    // Verify the auth user exists
-    try {
-      const auth = await getAdminAuth()
-      await auth.getUser(uid)
-    } catch {
-      return NextResponse.json(
-        { error: "Usuario de autenticación no encontrado" },
         { status: 400 },
       )
     }
