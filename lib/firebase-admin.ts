@@ -20,7 +20,9 @@ function ensureAdmin(): void {
     return
   }
 
-  const key = process.env.FIREBASE_ADMIN_KEY
+  const key = process.env.FIREBASE_ADMIN_KEY_B64
+    ? Buffer.from(process.env.FIREBASE_ADMIN_KEY_B64, "base64").toString("utf-8")
+    : process.env.FIREBASE_ADMIN_KEY || ""
   if (!key) {
     initError = `${ADMIN_INIT_ERROR} Motivo: FIREBASE_ADMIN_KEY no está configurada.`
     throw new Error(initError)
