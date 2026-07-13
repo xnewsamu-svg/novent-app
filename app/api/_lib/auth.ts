@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server"
-import { adminAuth, adminDb } from "@/lib/firebase-admin"
+import { getAdminAuth, adminDb } from "@/lib/firebase-admin"
 import { logger } from "@/src/lib/logger"
 
 export interface AuthContext {
@@ -24,7 +24,8 @@ export async function getAuthContext(req: NextRequest): Promise<AuthContext> {
 
   let decoded
   try {
-    decoded = await adminAuth.verifyIdToken(token)
+    const auth = await getAdminAuth()
+    decoded = await auth.verifyIdToken(token)
   } catch {
     throw new AuthError("Token inválido o expirado", 401)
   }

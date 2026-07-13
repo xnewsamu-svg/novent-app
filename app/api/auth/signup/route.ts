@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { adminAuth, adminDb } from "@/lib/firebase-admin"
+import { getAdminAuth, adminDb } from "@/lib/firebase-admin"
 import { handleError } from "@/app/api/_lib/auth"
 
 export async function POST(req: NextRequest) {
@@ -21,7 +21,8 @@ export async function POST(req: NextRequest) {
 
     // Verify the auth user exists
     try {
-      await adminAuth.getUser(uid)
+      const auth = await getAdminAuth()
+      await auth.getUser(uid)
     } catch {
       return NextResponse.json(
         { error: "Usuario de autenticación no encontrado" },

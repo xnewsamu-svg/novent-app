@@ -1,28 +1,29 @@
 import { initializeApp, getApps, cert } from "firebase-admin/app"
 import { getFirestore } from "firebase-admin/firestore"
-import { getAuth } from "firebase-admin/auth"
 
 const ADMIN_INIT_ERROR = "Firebase Admin SDK no se pudo inicializar. Verifica la variable FIREBASE_ADMIN_KEY en las variables de entorno del servidor."
 
 let adminDbInstance: ReturnType<typeof getFirestore> | null = null
-let adminAuthInstance: ReturnType<typeof getAuth> | null = null
+let appInstance: ReturnType<typeof initializeApp> | null = null
 let initError: string | null = null
 
-function ensureAdmin(): void {
-  if (adminDbInstance && adminAuthInstance) return
+function getKey(): string {
+  return process.env.FIREBASE_ADMIN_KEY_B64
+    ? Buffer.from(process.env.FIREBASE_ADMIN_KEY_B64, "base64").toString("utf-8")
+    : process.env.FIREBASE_ADMIN_KEY || ""
+}
+
+function ensureApp(): void {
+  if (appInstance) return
   if (initError) throw new Error(initError)
 
   const apps = getApps()
   if (apps.length > 0) {
-    const app = apps[0]
-    adminDbInstance = getFirestore(app)
-    adminAuthInstance = getAuth(app)
+    appInstance = apps[0]
     return
   }
 
-  const key = process.env.FIREBASE_ADMIN_KEY_B64
-    ? Buffer.from(process.env.FIREBASE_ADMIN_KEY_B64, "base64").toString("utf-8")
-    : process.env.FIREBASE_ADMIN_KEY || ""
+  const key = getKey()
   if (!key) {
     initError = `${ADMIN_INIT_ERROR} Motivo: FIREBASE_ADMIN_KEY no está configurada.`
     throw new Error(initError)
@@ -42,11 +43,9 @@ function ensureAdmin(): void {
   }
 
   try {
-    const app = initializeApp({
+    appInstance = initializeApp({
       credential: cert(parsed),
     })
-    adminDbInstance = getFirestore(app)
-    adminAuthInstance = getAuth(app)
   } catch (err) {
     initError = `${ADMIN_INIT_ERROR} Motivo: ${err instanceof Error ? err.message : String(err)}`
     throw new Error(initError)
@@ -54,27 +53,26 @@ function ensureAdmin(): void {
 }
 
 export function getAdminDb() {
-  ensureAdmin()
-  return adminDbInstance!
+  ensureApp()
+  if (!adminDbInstance) {
+    adminDbInstance = getFirestore(appInstance!)
+  }
+  return adminDbInstance
 }
 
-export function getAdminAuth() {
-  ensureAdmin()
-  return adminAuthInstance!
+export async function getAdminAuth() {
+  ensureApp()
+  const { getAuth } = await import("firebase-admin/auth")
+  return getAuth(appInstance!)
 }
 
 export const adminDb = new Proxy({} as ReturnType<typeof getFirestore>, {
   get(_target, prop) {
-    ensureAdmin()
+    ensureApp()
+    if (!adminDbInstance) {
+      adminDbInstance = getFirestore(appInstance!)
+    }
     const val = (adminDbInstance as unknown as Record<string, unknown>)[prop as string]
     return typeof val === "function" ? (val as (...args: unknown[]) => unknown).bind(adminDbInstance) : val
-  },
-})
-
-export const adminAuth = new Proxy({} as ReturnType<typeof getAuth>, {
-  get(_target, prop) {
-    ensureAdmin()
-    const val = (adminAuthInstance as unknown as Record<string, unknown>)[prop as string]
-    return typeof val === "function" ? (val as (...args: unknown[]) => unknown).bind(adminAuthInstance) : val
   },
 })
