@@ -1,0 +1,67 @@
+{
+  "title": "Envío de plantilla (template)",
+  "description": "Payload enviado desde una acción action.whatsapp.send con messageType=template",
+  "config": {
+    "actionType": "action.whatsapp.send",
+    "to": "{{event.customerPhone}}",
+    "messageType": "template",
+    "templateName": "bienvenida_negocio",
+    "languageCode": "es",
+    "bodyParameters": ["{{event.customerName}}"]
+  },
+  "context": {
+    "eventPayload": {
+      "companyId": "COMPANY_ID",
+      "customerPhone": "521234567890",
+      "customerName": "Juan Pérez"
+    }
+  },
+  "payloadEnviadoAMeta": {
+    "messaging_product": "whatsapp",
+    "recipient_type": "individual",
+    "to": "521234567890",
+    "type": "template",
+    "template": {
+      "name": "bienvenida_negocio",
+      "language": {
+        "code": "es"
+      },
+      "components": [
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "Juan Pérez"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "respuestaEsperadaDeMeta": {
+    "messaging_product": "whatsapp",
+    "contacts": [
+      {
+        "input": "521234567890",
+        "wa_id": "521234567890"
+      }
+    ],
+    "messages": [
+      {
+        "id": "wamid.HBgN1MjE3MDY1NTY5NTQ1OBUCABIYFjI0N0Q3NjM2Mzg5N0U1MjVCM0I1AA=="
+      }
+    ]
+  },
+  "actionResultGenerado": {
+    "success": true,
+    "output": {
+      "to": "521234567890",
+      "messageType": "template",
+      "messageId": "wamid.HBgN1MjE3MDY1NTY5NTQ1OBUCABIYFjI0N0Q3NjM2Mzg5N0U1MjVCM0I1AA==",
+      "waId": "521234567890"
+    },
+    "error": null,
+    "retrayable": false
+  }
+}

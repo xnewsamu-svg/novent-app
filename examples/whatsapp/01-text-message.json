@@ -1,0 +1,39 @@
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "WHATSAPP_BUSINESS_ACCOUNT_ID",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "521234567890",
+              "phone_number_id": "PHONE_NUMBER_ID"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "Juan Pérez"
+                },
+                "wa_id": "5210987654321"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5210987654321",
+                "id": "wamid.ABC123",
+                "timestamp": "1720000000",
+                "type": "text",
+                "text": {
+                  "body": "Hola, ¿cuánto cuesta un corte de cabello?"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "Envío de mensaje de texto",
+  "description": "Payload enviado desde una acción action.whatsapp.send con messageType=text",
+  "config": {
+    "actionType": "action.whatsapp.send",
+    "to": "{{event.customerPhone}}",
+    "messageType": "text",
+    "body": "Hola {{event.customerName}}, gracias por escribirnos. Te atenderemos en breve.",
+    "previewUrl": false
+  },
+  "context": {
+    "eventPayload": {
+      "companyId": "COMPANY_ID",
+      "customerPhone": "521234567890",
+      "customerName": "Juan Pérez"
+    }
+  },
+  "payloadEnviadoAMeta": {
+    "messaging_product": "whatsapp",
+    "recipient_type": "individual",
+    "to": "521234567890",
+    "type": "text",
+    "text": {
+      "body": "Hola Juan Pérez, gracias por escribirnos. Te atenderemos en breve.",
+      "preview_url": false
+    }
+  },
+  "respuestaEsperadaDeMeta": {
+    "messaging_product": "whatsapp",
+    "contacts": [
+      {
+        "input": "521234567890",
+        "wa_id": "521234567890"
+      }
+    ],
+    "messages": [
+      {
+        "id": "wamid.HBgN1MjE3MDY1NTY5NTQ1OBUCABIYFjI0N0Q3MzYyMzg5N0U1MjVCM0I1AA=="
+      }
+    ]
+  },
+  "actionResultGenerado": {
+    "success": true,
+    "output": {
+      "to": "521234567890",
+      "messageType": "text",
+      "messageId": "wamid.HBgN1MjE3MDY1NTY5NTQ1OBUCABIYFjI0N0Q3MzYyMzg5N0U1MjVCM0I1AA==",
+      "waId": "521234567890"
+    },
+    "error": null,
+    "retryable": false
+  }
+}

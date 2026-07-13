@@ -1,0 +1,42 @@
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "WHATSAPP_BUSINESS_ACCOUNT_ID",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "521234567890",
+              "phone_number_id": "PHONE_NUMBER_ID"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "María García"
+                },
+                "wa_id": "5210987654321"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5210987654321",
+                "id": "wamid.IMG456",
+                "timestamp": "1720000002",
+                "type": "image",
+                "image": {
+                  "id": "MEDIA_ID_123",
+                  "caption": "Mira mi nuevo look",
+                  "mime_type": "image/jpeg",
+                  "sha256": "HASH_256"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}

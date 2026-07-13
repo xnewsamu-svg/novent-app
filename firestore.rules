@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================================
+    // HELPER FUNCTIONS
+    // ============================================================
+
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function isInCompany(companyId) {
+      return exists(/databases/$(database)/documents/companies/$(companyId)/users/$(request.auth.uid));
+    }
+
+    function canRead(companyId) {
+      return isAuth() && isInCompany(companyId);
+    }
+
+    // ============================================================
+    // GLOBAL COLLECTIONS
+    // ============================================================
+
+    // users/{uid} — user can read their own doc, create on signup
+    match /users/{uid} {
+      allow read: if isAuth() && request.auth.uid == uid;
+      allow create: if isAuth() && request.auth.uid == uid;
+      allow update: if isAuth() && request.auth.uid == uid;
+      allow delete: if false;
+    }
+
+    // companies/{companyId} — reads only from client, writes via Admin API
+    match /companies/{companyId} {
+      allow read: if canRead(companyId);
+      allow create: if isAuth() && request.resource.data.owner == request.auth.uid;
+      allow update: if false;
+      allow delete: if false;
+
+      // All subcollections: read allowed for company members, writes blocked (API-only)
+      match /{document=**} {
+        allow read: if canRead(companyId);
+        allow create: if false;
+        allow update: if false;
+        allow delete: if false;
+      }
+    }
+  }
+}

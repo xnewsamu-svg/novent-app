@@ -1,0 +1,894 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta charset="UTF-8">
+<title>Informe Ejecutivo - Novent App</title>
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+/* === WORD-COMPATIBLE STYLES === */
+body {
+  font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #1a1a1a;
+  margin: 60px 80px;
+  background: white;
+}
+
+/* ===== TITLE PAGE ===== */
+.title-page {
+  text-align: center;
+  padding-top: 180px;
+  page-break-after: always;
+}
+.title-page .logo {
+  font-size: 48pt;
+  font-weight: 900;
+  letter-spacing: -2pt;
+  color: #000;
+  margin-bottom: 8px;
+}
+.title-page .logo-sub {
+  font-size: 11pt;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 4pt;
+  margin-bottom: 60px;
+}
+.title-page h1 {
+  font-size: 32pt;
+  font-weight: 300;
+  color: #000;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+.title-page h1 strong {
+  font-weight: 900;
+}
+.title-page .subtitle {
+  font-size: 14pt;
+  color: #555;
+  margin-bottom: 60px;
+}
+.title-page .meta {
+  font-size: 10pt;
+  color: #999;
+  margin-top: 100px;
+  line-height: 2;
+}
+.title-page .divider {
+  width: 80px;
+  height: 4px;
+  background: #000;
+  margin: 30px auto;
+}
+
+/* ===== SECTION BREAKS ===== */
+.section {
+  page-break-before: always;
+  padding-top: 20px;
+}
+
+/* ===== HEADINGS ===== */
+h1 { font-size: 22pt; font-weight: 800; color: #000; margin-top: 28px; margin-bottom: 16px; border-bottom: 2px solid #000; padding-bottom: 6px; }
+h2 { font-size: 16pt; font-weight: 700; color: #1a1a1a; margin-top: 24px; margin-bottom: 10px; }
+h3 { font-size: 12pt; font-weight: 700; color: #333; margin-top: 18px; margin-bottom: 8px; }
+h4 { font-size: 11pt; font-weight: 600; color: #444; margin-top: 14px; margin-bottom: 6px; }
+
+/* ===== TABLES ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 18px 0;
+  font-size: 10pt;
+}
+table th {
+  background: #1a1a1a;
+  color: white;
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 700;
+}
+table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #ddd;
+}
+table tr:nth-child(even) td {
+  background: #f7f7f7;
+}
+table .check { color: #2e7d32; font-weight: bold; }
+table .cross { color: #c62828; }
+
+/* ===== STATUS BADGES ===== */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 9pt;
+  font-weight: 700;
+}
+.badge-green { background: #e8f5e9; color: #2e7d32; }
+.badge-red { background: #ffebee; color: #c62828; }
+.badge-blue { background: #e3f2fd; color: #1565c0; }
+.badge-amber { background: #fff8e1; color: #f57f17; }
+.badge-gray { background: #f5f5f5; color: #616161; }
+
+/* ===== CALLOUT BOXES ===== */
+.callout {
+  padding: 14px 18px;
+  border-left: 4px solid #1565c0;
+  background: #f0f7ff;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+.callout-warning {
+  border-left-color: #f57f17;
+  background: #fff8e1;
+}
+.callout-success {
+  border-left-color: #2e7d32;
+  background: #e8f5e9;
+}
+
+/* ===== METRIC CARDS ===== */
+.metrics {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.metric {
+  flex: 1;
+  min-width: 140px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.metric .value {
+  font-size: 22pt;
+  font-weight: 900;
+  color: #000;
+}
+.metric .label {
+  font-size: 9pt;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1pt;
+  margin-top: 4px;
+}
+
+/* ===== MISC ===== */
+p { margin: 6px 0; }
+ul, ol { margin: 6px 0 12px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { background: #f0f0f0; padding: 1px 6px; border-radius: 3px; font-size: 9.5pt; }
+.footnote { font-size: 9pt; color: #999; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 12px; }
+.page-break { page-break-before: always; }
+
+/* ===== ARCHITECTURE DIAGRAM ===== */
+.diagram {
+  margin: 20px 0;
+  padding: 20px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 9pt;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- TITLE PAGE -->
+<!-- ============================================================ -->
+
+<div class="title-page">
+  <div class="logo">NOVENT</div>
+  <div class="logo-sub">Software de Gestión Inteligente</div>
+  <div class="divider"></div>
+  <h1><strong>Informe Ejecutivo</strong><br>Sprint 1.6 — 1.7</h1>
+  <p class="subtitle">
+    Sistema Multi-Tipo de Negocio +<br>
+    Automatización WhatsApp → Citas y Clientes
+  </p>
+  <div class="meta">
+    <strong>Preparado para:</strong> Junta Directiva<br>
+    <strong>Fecha:</strong> Julio 2026<br>
+    <strong>Versión:</strong> v1.7.0<br>
+    <strong>Clasificación:</strong> Confidencial
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TABLE OF CONTENTS -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>Índice</h1>
+<ol style="font-size: 11pt; line-height: 2.2;">
+  <li>Resumen Ejecutivo</li>
+  <li>Visión General del Producto</li>
+  <li>Sistema Multi-Tipo de Negocio</li>
+  <li>Módulos Implementados por Tipo</li>
+  <li>Pipeline de Automatización WhatsApp</li>
+  <li>Arquitectura Técnica</li>
+  <li>Métricas del Sprint</li>
+  <li>Próximos Pasos (Roadmap)</li>
+  <li>Estado del Proyecto</li>
+</ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- 1. RESUMEN EJECUTIVO -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>1. Resumen Ejecutivo</h1>
+
+<p>
+  Este informe detalla los avances realizados en los Sprints 1.6 y 1.7 de Novent App,
+  enfocados en dos pilares estratégicos:
+</p>
+
+<ol>
+  <li>
+    <strong>Sistema Multi-Tipo de Negocio</strong> — La plataforma ahora se adapta
+    al tipo de negocio del cliente (Restaurante, Barbería, Odontología u Otro),
+    mostrando únicamente los módulos relevantes para cada uno.
+  </li>
+  <li>
+    <strong>Automatización WhatsApp → Citas y Clientes</strong> — Se completó el
+    pipeline que permite a los clientes agendar citas y ser registrados en el CRM
+    automáticamente a través de palabras clave en WhatsApp.
+  </li>
+</ol>
+
+<div class="callout callout-success">
+  <strong>Hito alcanzado:</strong> El motor de automatización V2 está completamente
+  funcional e integrado con el webhook de WhatsApp. Cero errores de TypeScript,
+  29 rutas generadas, build exitoso.
+</div>
+
+<div class="metrics">
+  <div class="metric">
+    <div class="value">29</div>
+    <div class="label">Rutas</div>
+  </div>
+  <div class="metric">
+    <div class="value">0</div>
+    <div class="label">Errores Build</div>
+  </div>
+  <div class="metric">
+    <div class="value">0</div>
+    <div class="label">Errores TS</div>
+  </div>
+  <div class="metric">
+    <div class="value">4</div>
+    <div class="label">Tipos Negocio</div>
+  </div>
+  <div class="metric">
+    <div class="value">6-8</div>
+    <div class="label">Módulos x Tipo</div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. VISIÓN GENERAL -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>2. Visión General del Producto</h1>
+
+<p>
+  Novent es una plataforma SaaS de gestión empresarial diseñada para
+  <strong>pequeños y medianos negocios</strong> en Latinoamérica. A diferencia de
+  sistemas monolíticos, Novent se adapta al tipo de negocio del cliente,
+  ofreciendo solo los módulos que realmente necesita.
+</p>
+
+<h2>2.1 Problema que Resolvemos</h2>
+<p>
+  Los softwares de gestión tradicionales son genéricos: un restaurante, una barbería
+  y una odontología ven exactamente los mismos módulos. Esto genera:
+</p>
+<ul>
+  <li><strong>Fricción en onboarding:</strong> El usuario ve funciones que no le sirven</li>
+  <li><strong>Complejidad innecesaria:</strong> Una barbería no necesita control de stock con costos</li>
+  <li><strong>Oportunidades perdidas:</strong> Una odontología necesita citas, no inventario</li>
+</ul>
+
+<h2>2.2 Solución</h2>
+<p>
+  Implementamos un sistema de <strong>Business Type</strong> que se selecciona al
+  registrar la empresa. En función del tipo, la plataforma muestra dinámicamente
+  los módulos relevantes y oculta los que no aplican.
+</p>
+
+<div class="callout">
+  <strong>Ejemplo:</strong> Si un cliente selecciona "Barbería", ve en su menú:
+  Dashboard, Clientes, Ventas, <strong>Servicios</strong> (catálogo de precios,
+  sin stock) y <strong>Citas</strong> (calendario). Nunca ve "Inventario".
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. SISTEMA MULTI-TIPO -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>3. Sistema Multi-Tipo de Negocio</h1>
+
+<h2>3.1 Tipos Soportados</h2>
+
+<table>
+  <tr>
+    <th>Tipo</th>
+    <th>Icono</th>
+    <th>Descripción</th>
+    <th>Módulos</th>
+  </tr>
+  <tr>
+    <td><strong>Restaurante</strong></td>
+    <td>🍽️</td>
+    <td>Inventario con stock, costos y reportes mensuales de gasto</td>
+    <td>Dashboard, Clientes, Ventas, Inventario, WhatsApp, Automatizaciones</td>
+  </tr>
+  <tr>
+    <td><strong>Barbería</strong></td>
+    <td>💇</td>
+    <td>Catálogo de servicios + citas, integrado con ventas</td>
+    <td>Dashboard, Clientes, Ventas, Servicios, Citas, WhatsApp, Automatizaciones</td>
+  </tr>
+  <tr>
+    <td><strong>Odontología</strong></td>
+    <td>🦷</td>
+    <td>Gestión de citas con calendario + automatización WhatsApp</td>
+    <td>Dashboard, Clientes, Ventas, Citas, WhatsApp, Automatizaciones</td>
+  </tr>
+  <tr>
+    <td><strong>Otro</strong></td>
+    <td>📋</td>
+    <td>Módulos base para negocios generales</td>
+    <td>Dashboard, Clientes, Ventas, WhatsApp, Automatizaciones</td>
+  </tr>
+</table>
+
+<h2>3.2 Matriz de Módulos por Tipo</h2>
+
+<table>
+  <tr>
+    <th>Módulo</th>
+    <th>🍽️ Restaurante</th>
+    <th>💇 Barbería</th>
+    <th>🦷 Odontología</th>
+    <th>📋 Otro</th>
+  </tr>
+  <tr>
+    <td>Dashboard</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+  </tr>
+  <tr>
+    <td>Clientes</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+  </tr>
+  <tr>
+    <td>Ventas (POS)</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+  </tr>
+  <tr>
+    <td>Inventario (stock + costos)</td>
+    <td class="check">✅</td>
+    <td class="cross">❌</td>
+    <td class="cross">❌</td>
+    <td class="cross">❌</td>
+  </tr>
+  <tr>
+    <td>Servicios (catálogo precios)</td>
+    <td class="cross">❌</td>
+    <td class="check">✅</td>
+    <td class="cross">❌</td>
+    <td class="cross">❌</td>
+  </tr>
+  <tr>
+    <td>Citas (calendario)</td>
+    <td class="cross">❌</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="cross">❌</td>
+  </tr>
+  <tr>
+    <td>WhatsApp</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+  </tr>
+  <tr>
+    <td>Automatizaciones</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+    <td class="check">✅</td>
+  </tr>
+</table>
+
+<h2>3.3 Flujo de Onboarding</h2>
+
+<ol>
+  <li><strong>Registro:</strong> El usuario ingresa nombre del negocio, selecciona tipo (4 tarjetas visuales), email y contraseña</li>
+  <li><strong>Creación:</strong> Se guarda el <code>businessType</code> en el documento de la compañía</li>
+  <li><strong>Sidebar dinámica:</strong> La barra lateral se renderiza mostrando solo los módulos del tipo seleccionado</li>
+  <li><strong>Empresas existentes:</strong> Al hacer login, si no tienen <code>businessType</code>, se les forza a elegir uno antes de acceder al dashboard</li>
+  <li><strong>Configurable:</strong> El tipo se puede cambiar desde Ajustes en cualquier momento</li>
+</ol>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. MÓDULOS IMPLEMENTADOS -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>4. Módulos Implementados por Tipo</h1>
+
+<h2>4.1 Barbería — Módulo Servicios</h2>
+<p>
+  Reemplaza al inventario tradicional. Es un catálogo de servicios con precios,
+  diseñado para negocios que venden servicios (no productos físicos).
+</p>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Descripción</th></tr>
+  <tr><td>nombre</td><td>string</td><td>Nombre del servicio (ej: Corte de cabello)</td></tr>
+  <tr><td>precio</td><td>number</td><td>Precio al público</td></tr>
+  <tr><td>descripcion</td><td>string</td><td>Descripción opcional</td></tr>
+  <tr><td>duracion</td><td>number</td><td>Duración en minutos</td></tr>
+  <tr><td>categoria</td><td>string</td><td>Categoría (ej: Cuidado personal)</td></tr>
+</table>
+<p><strong>Integración con Ventas:</strong> Los servicios aparecen como items seleccionables en el POS.</p>
+
+<h2>4.2 Odontología — Módulo Citas</h2>
+<p>
+  Reemplaza al inventario. Incluye un calendario completo con vista mensual,
+  detalle por día y CRUD completo de citas.
+</p>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Descripción</th></tr>
+  <tr><td>pacienteNombre</td><td>string</td><td>Nombre del paciente</td></tr>
+  <tr><td>pacienteTelefono</td><td>string</td><td>Teléfono de contacto</td></tr>
+  <tr><td>fecha</td><td>date</td><td>Fecha de la cita (YYYY-MM-DD)</td></tr>
+  <tr><td>hora</td><td>time</td><td>Hora de la cita (HH:mm)</td></tr>
+  <tr><td>duracion</td><td>number</td><td>Duración en minutos</td></tr>
+  <tr><td>estado</td><td>enum</td><td>pendiente | confirmada | en_progreso | completada | cancelada</td></tr>
+  <tr><td>precio</td><td>number</td><td>Precio de la consulta</td></tr>
+</table>
+<p><strong>Calendario:</strong> Vista mensual con navegación, indicador visual de citas por día, y panel lateral con detalle del día seleccionado.</p>
+
+<h2>4.3 Restaurante — Inventario Mejorado</h2>
+<p>Se agregó el campo <strong>costo</strong> (costo por unidad) al inventario existente, más un reporte de gasto mensual estimado:</p>
+<ul>
+  <li><strong>Costo por unidad:</strong> Permite saber cuánto se pagó por cada producto</li>
+  <li><strong>Costo total en inventario:</strong> Suma de costo × stock de todos los productos</li>
+  <li><strong>Gasto mensual estimado:</strong> Cálculo basado en rotación de inventario</li>
+  <li>Visualizado como tarjeta "Gasto mensual estimado" en el dashboard de inventario</li>
+</ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. PIPELINE WHATSAPP -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>5. Pipeline de Automatización WhatsApp</h1>
+
+<h2>5.1 Flujo Completo</h2>
+
+<p>El siguiente diagrama muestra el flujo desde que un cliente envía un mensaje hasta que se crea la cita y el cliente en el sistema:</p>
+
+<div class="diagram">
+┌─────────────────────────────────────────────────────────────────┐
+│                    WHATSAPP WEBHOOK                              │
+│  POST /api/webhooks/whatsapp                                     │
+│  ├─ Verifica firma X-Hub-Signature-256                           │
+│  ├─ Resuelve companyId por phone_number_id                       │
+│  └─ Normaliza payload → eventos AutomationEvent                  │
+└───────────────────┬─────────────────────────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    V2 AUTOMATION ENGINE                           │
+│  run(event, services)                                            │
+│  ├─ workflowService.findWorkflowsByEvent(companyId, event)       │
+│  │   └─ Obtiene TODOS los workflows enabled + published          │
+│  │   └─ triggerRegistry.findMatchingWorkflows()                  │
+│  │       ├─ Para c/workflow: obtiene matcher por eventType       │
+│  │       └─ match(event, workflow) → filtra por keyword          │
+│  ├─ Crea Execution en Firestore                                  │
+│  ├─ Ejecuta nodos del workflow:                                  │
+│  │   1. TRIGGER (whatsapp.keyword_match) → verifica keyword      │
+│  │   2. ACTION (action.customer.create) → crea cliente en CRM    │
+│  │   3. ACTION (action.cita.create) → crea cita en calendario    │
+│  └─ Completa execution con logs                                  │
+└─────────────────────────────────────────────────────────────────┘
+</div>
+
+<h2>5.2 Componentes del Pipeline</h2>
+
+<table>
+  <tr>
+    <th>Componente</th>
+    <th>Archivo</th>
+    <th>Función</th>
+  </tr>
+  <tr>
+    <td>Webhook Handler</td>
+    <td><code>app/api/webhooks/whatsapp/route.ts</code></td>
+    <td>Recibe POST de Meta, verifica firma, resuelve companyId</td>
+  </tr>
+  <tr>
+    <td>Normalizador</td>
+    <td><code>src/automation/providers/whatsapp/normalizer.ts</code></td>
+    <td>Convierte payload de Meta a eventos normalizados</td>
+  </tr>
+  <tr>
+    <td>Trigger Keyword</td>
+    <td><code>src/automation/triggers/whatsapp-keyword.trigger.ts</code></td>
+    <td>Filtra mensajes por palabra clave configurable (exact, contains, startsWith)</td>
+  </tr>
+  <tr>
+    <td>Acción Crear Cliente</td>
+    <td><code>src/automation/actions/customer-create.action.ts</code></td>
+    <td>Busca cliente por teléfono o crea uno nuevo en CRM</td>
+  </tr>
+  <tr>
+    <td>Acción Crear Cita</td>
+    <td><code>src/automation/actions/cita-create.action.ts</code></td>
+    <td>Crea cita en calendario + busca o crea cliente automáticamente</td>
+  </tr>
+</table>
+
+<h2>5.3 Ejemplo de Uso — Odontología</h2>
+
+<div class="callout callout-success">
+  <strong>Caso de uso:</strong> "Confirmar cita por WhatsApp"
+</div>
+<ol>
+  <li>Paciente envía "confirmar" al número de WhatsApp del negocio</li>
+  <li>Webhook de Meta envía el evento a <code>POST /api/webhooks/whatsapp</code></li>
+  <li>El trigger <code>whatsapp.keyword_match</code> detecta la keyword "confirmar"</li>
+  <li>El workflow ejecuta dos acciones en secuencia:
+    <ol>
+      <li><strong>Crear Cliente:</strong> Busca el número en CRM, si no existe lo crea</li>
+      <li><strong>Crear Cita:</strong> Crea una cita con estado "pendiente" para el día actual</li>
+    </ol>
+  </li>
+  <li>El paciente queda registrado en el sistema con su cita agendada</li>
+</ol>
+
+<h2>5.4 Configuración del Trigger Keyword</h2>
+<p>
+  El trigger <code>whatsapp.keyword_match</code> es totalmente configurable:
+</p>
+<table>
+  <tr><th>Parámetro</th><th>Valores</th><th>Descripción</th></tr>
+  <tr><td><code>keyword</code></td><td>string</td><td>Palabra clave a detectar (ej: "confirmar", "agendar")</td></tr>
+  <tr><td><code>matchMode</code></td><td><code>exact</code>, <code>contains</code>, <code>startsWith</code></td><td>Modo de coincidencia</td></tr>
+</table>
+<p>
+  El usuario crea el workflow desde la sección Automatizaciones, selecciona el trigger
+  "Palabra clave en WhatsApp" y configura su keyword. Sin código, sin configuración técnica.
+</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. ARQUITECTURA -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>6. Arquitectura Técnica</h1>
+
+<h2>6.1 Stack Tecnológico</h2>
+
+<table>
+  <tr><th>Capa</th><th>Tecnología</th><th>Versión</th></tr>
+  <tr><td>Framework</td><td>Next.js</td><td>16.2.6 (Turbopack)</td></tr>
+  <tr><td>Lenguaje</td><td>TypeScript</td><td>~5.x</td></tr>
+  <tr><td>Base de datos</td><td>Firebase Firestore</td><td>-</td></tr>
+  <tr><td>Autenticación</td><td>Firebase Auth</td><td>-</td></tr>
+  <tr><td>Admin SDK</td><td>firebase-admin</td><td>-</td></tr>
+  <tr><td>UI</td><td>Tailwind CSS + shadcn/ui</td><td>-</td></tr>
+  <tr><td>Fechas</td><td>date-fns</td><td>4.3.0</td></tr>
+  <tr><td>WhatsApp API</td><td>Meta Graph API (directo)</td><td>-</td></tr>
+</table>
+
+<h2>6.2 Estructura de Archivos (nuevos/modificados)</h2>
+
+<table>
+  <tr><th>Archivo</th><th>Estado</th><th>Propósito</th></tr>
+  <tr><td><code>lib/types.ts</code></td><td><span class="badge badge-blue">Modificado</span></td><td>BusinessType actualizado</td></tr>
+  <tr><td><code>src/config/modules.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Mapa de módulos por tipo de negocio</td></tr>
+  <tr><td><code>src/hooks/useCompanyType.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Hook para obtener el tipo de empresa</td></tr>
+  <tr><td><code>app/signup/page.tsx</code></td><td><span class="badge badge-blue">Modificado</span></td><td>Selector de tipo en registro</td></tr>
+  <tr><td><code>app/(protected)/layout.tsx</code></td><td><span class="badge badge-blue">Modificado</span></td><td>Sidebar dinámica + diálogo de migración</td></tr>
+  <tr><td><code>app/(protected)/dashboard/page.tsx</code></td><td><span class="badge badge-blue">Modificado</span></td><td>Selector de tipo en "Crear empresa"</td></tr>
+  <tr><td><code>src/services/servicios.service.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>CRUD servicios (barbería)</td></tr>
+  <tr><td><code>src/hooks/useServicios.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Hook servicios</td></tr>
+  <tr><td><code>app/(protected)/servicios/page.tsx</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Página servicios con CRUD</td></tr>
+  <tr><td><code>src/services/citas.service.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>CRUD citas (odontología)</td></tr>
+  <tr><td><code>src/hooks/useCitas.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Hook citas</td></tr>
+  <tr><td><code>app/(protected)/citas/page.tsx</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Página citas con calendario</td></tr>
+  <tr><td><code>src/services/inventory.service.ts</code></td><td><span class="badge badge-blue">Modificado</span></td><td>Campo costo agregado</td></tr>
+  <tr><td><code>app/(protected)/inventario/page.tsx</code></td><td><span class="badge badge-blue">Modificado</span></td><td>Costo + reporte mensual</td></tr>
+  <tr><td><code>app/(protected)/ajustes/page.tsx</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Página de configuración con selector de tipo</td></tr>
+  <tr><td><code>src/automation/triggers/whatsapp-keyword.trigger.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Trigger keyword WhatsApp</td></tr>
+  <tr><td><code>src/automation/actions/cita-create.action.ts</code></td><td><span class="badge badge-green">Nuevo</span></td><td>Acción crear cita + cliente</td></tr>
+  <tr><td><code>src/automation/index.ts</code></td><td><span class="badge badge-blue">Modificado</span></td><td>Importaciones nuevos registros</td></tr>
+  <tr><td><code>src/automation/types/trigger.ts</code></td><td><span class="badge badge-blue">Modificado</span></td><td>match() ahora recibe workflow opcional</td></tr>
+  <tr><td><code>src/automation/types/workflow.ts</code></td><td><span class="badge badge-blue">Modificado</span></td><td>WorkflowTrigger.config agregado</td></tr>
+  <tr><td><code>src/automation/services/workflow.service.ts</code></td><td><span class="badge badge-blue">Modificado</span></td><td>Usa triggerRegistry para filtrar workflows</td></tr>
+</table>
+
+<h2>6.3 Diagrama de Arquitectura del Motor de Automatización V2</h2>
+
+<div class="diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                    AUTOMATION ENGINE V2                              │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌─────────────┐    ┌──────────────┐    ┌──────────────────────┐   │
+│  │ Trigger      │    │ Condition    │    │ Action               │   │
+│  │ Registry     │───▶│ Registry     │───▶│ Registry             │   │
+│  │ (Map-based)  │    │ (Map-based)  │    │ (Map-based)          │   │
+│  └──────┬───────┘    └──────┬───────┘    └─────────┬────────────┘   │
+│         │                   │                      │                │
+│  ┌──────┴───────┐    ┌──────┴───────┐    ┌─────────┴────────────┐  │
+│  │ 7 Triggers   │    │ 2 Evaluators │    │ 10 Actions           │  │
+│  │ (incl.       │    │ (comparison  │    │ (incl. cita.create,  │  │
+│  │  keyword)    │    │  + logical)  │    │  customer.create)    │  │
+│  └──────────────┘    └──────────────┘    └──────────────────────┘  │
+│                                                                     │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │                    WORKFLOW ENGINE                             │  │
+│  │  run() → findWorkflowsByEvent() → createExecution()           │  │
+│  │  → executeLoop() → findFirstNode() → executeNode()            │  │
+│  │  → findNextNode() → completeExecution()                       │  │
+│  │  Límites: 200 nodes, 5 retries, 30 min duración               │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+│                                                                     │
+│  ┌─────────────┐  ┌──────────────┐  ┌────────────────────────┐    │
+│  │ Validators  │  │ Services     │  │ Engine Adapter          │    │
+│  │ (workflow,  │  │ (workflow,   │  │ (conecta engine con     │    │
+│  │  node,edge) │  │  execution,  │  │  Firestore + Scheduler) │    │
+│  └─────────────┘  │  scheduler)  │  └────────────────────────┘    │
+│                   └──────────────┘                                 │
+└─────────────────────────────────────────────────────────────────────┘
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. MÉTRICAS DEL SPRINT -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>7. Métricas del Sprint</h1>
+
+<h2>7.1 Generales</h2>
+
+<table>
+  <tr><th>Métrica</th><th>Valor</th></tr>
+  <tr><td>Build</td><td><span class="badge badge-green">✅ Exitoso</span></td></tr>
+  <tr><td>TypeScript (tsc --noEmit)</td><td><span class="badge badge-green">✅ 0 errores</span></td></tr>
+  <tr><td>Rutas totales</td><td>29</td></tr>
+  <tr><td>Nuevas rutas (servicios, citas, ajustes)</td><td>3</td></tr>
+  <tr><td>Archivos nuevos</td><td>11</td></tr>
+  <tr><td>Archivos modificados</td><td>12</td></tr>
+  <tr><td>Tests (de todo el proyecto)</td><td>127/127</td></tr>
+  <tr><td>Uso de <code>any</code> en <code>src/automation/</code></td><td><span class="badge badge-green">✅ 0</span></td></tr>
+  <tr><td>Uso de <code>onSnapshot</code> en dashboard</td><td><span class="badge badge-green">✅ 0</span></td></tr>
+</table>
+
+<h2>7.2 Resumen de Componentes del Motor V2</h2>
+
+<table>
+  <tr><th>Componente</th><th>Cantidad</th></tr>
+  <tr><td>Triggers registrados</td><td>8 (customer, sale, inventory, lead, birthday, scheduled, webhook, keyword)</td></tr>
+  <tr><td>Actions registradas</td><td>11 (whatsapp, email, webhook, 2x customer, sale, inventory, event-emit, delay, cita-create)</td></tr>
+  <tr><td>Condiciones</td><td>2 evaluadores (comparison 12 operadores, logical AND/OR/NOT)</td></tr>
+  <tr><td>Executors</td><td>5 (trigger, condition, action, delay, end)</td></tr>
+  <tr><td>Servicios</td><td>3 (workflow, execution, scheduler) + 1 adapter</td></tr>
+  <tr><td>Validadores</td><td>3 (workflow, node, edge)</td></tr>
+</table>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. PRÓXIMOS PASOS -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>8. Próximos Pasos (Roadmap)</h1>
+
+<h2>8.1 Pre-Beta (antes de invitar usuarios)</h2>
+
+<table>
+  <tr><th>#</th><th>Tarea</th><th>Prioridad</th><th>Estado</th></tr>
+  <tr>
+    <td>1</td>
+    <td>Desplegar reglas de Firestore + índices</td>
+    <td><span class="badge badge-red">CRÍTICO</span></td>
+    <td><span class="badge badge-amber">Pendiente</span></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Configurar variables de entorno en Vercel</td>
+    <td><span class="badge badge-red">CRÍTICO</span></td>
+    <td><span class="badge badge-amber">Pendiente</span></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Configurar webhook de WhatsApp en producción</td>
+    <td><span class="badge badge-red">CRÍTICO</span></td>
+    <td><span class="badge badge-amber">Pendiente</span></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Configurar cron job para scheduler</td>
+    <td><span class="badge badge-blue">ALTA</span></td>
+    <td><span class="badge badge-amber">Pendiente</span></td>
+  </tr>
+</table>
+
+<h2>8.2 Post-Beta (Sprint 1.8+)</h2>
+
+<table>
+  <tr><th>#</th><th>Tarea</th><th>Prioridad</th></tr>
+  <tr><td>1</td><td>Conectar acciones reales (WhatsApp, Email con APIs reales)</td><td><span class="badge badge-blue">ALTA</span></td></tr>
+  <tr><td>2</td><td>Escribir tests de integración (Firestore emulator)</td><td><span class="badge badge-blue">ALTA</span></td></tr>
+  <tr><td>3</td><td>Editor visual de workflows (drag & drop)</td><td><span class="badge badge-blue">ALTA</span></td></tr>
+  <tr><td>4</td><td>API Routes CRUD para workflows y executions</td><td><span class="badge badge-blue">ALTA</span></td></tr>
+  <tr><td>5</td><td>Dashboard de analytics por tipo de negocio</td><td><span class="badge badge-amber">MEDIA</span></td></tr>
+  <tr><td>6</td><td>Reportes avanzados de inventario (restaurante)</td><td><span class="badge badge-amber">MEDIA</span></td></tr>
+  <tr><td>7</td><td>Vista semanal en calendario de citas</td><td><span class="badge badge-amber">MEDIA</span></td></tr>
+  <tr><td>8</td><td>Notificaciones push para recordatorio de citas</td><td><span class="badge badge-amber">MEDIA</span></td></tr>
+  <tr><td>9</td><td>Múltiples keywords por workflow</td><td><span class="badge badge-gray">BAJA</span></td></tr>
+  <tr><td>10</td><td>Plantillas de workflow pre-configuradas por tipo de negocio</td><td><span class="badge badge-gray">BAJA</span></td></tr>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. ESTADO -->
+<!-- ============================================================ -->
+
+<div class="section">
+<h1>9. Estado del Proyecto</h1>
+
+<h2>9.1 Leyenda de Estados</h2>
+<p>
+  <span class="badge badge-green">✅ Completo</span>
+  <span class="badge badge-blue">En Progreso</span>
+  <span class="badge badge-amber">Pendiente</span>
+  <span class="badge badge-gray">Bloqueado</span>
+</p>
+
+<h2>9.2 Estado General</h2>
+
+<table>
+  <tr><th>Área</th><th>Estado</th><th>Observaciones</th></tr>
+  <tr>
+    <td>Engine V1 (legacy)</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>Funcional, no se modifica</td>
+  </tr>
+  <tr>
+    <td>Engine V2</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>32 archivos, 0 any, pipeline WhatsApp completo</td>
+  </tr>
+  <tr>
+    <td>Dashboard</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>0 onSnapshot, polling, componentes presentacionales</td>
+  </tr>
+  <tr>
+    <td>Multi-Tipo Negocio</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>4 tipos, sidebar dinámica, migración automática</td>
+  </tr>
+  <tr>
+    <td>Módulo Servicios</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>CRUD + integración POS (Barbería)</td>
+  </tr>
+  <tr>
+    <td>Módulo Citas</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>Calendario + CRUD (Odontología/Barbería)</td>
+  </tr>
+  <tr>
+    <td>Inventario Mejorado</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>Costo + reporte mensual (Restaurante)</td>
+  </tr>
+  <tr>
+    <td>WhatsApp Keyword Trigger</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>Configurable, integrado con pipeline V2</td>
+  </tr>
+  <tr>
+    <td>Acción Crear Cita</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>Crea cliente + cita automáticamente</td>
+  </tr>
+  <tr>
+    <td>Página Ajustes</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>Selector de tipo de negocio</td>
+  </tr>
+  <tr>
+    <td>Flujo Registro → Onboarding</td>
+    <td><span class="badge badge-green">✅ Completo</span></td>
+    <td>Selección de tipo en signup + migración</td>
+  </tr>
+  <tr>
+    <td>Deploy a producción</td>
+    <td><span class="badge badge-amber">Pendiente</span></td>
+    <td>Requiere reglas Firestore + env vars + webhook config</td>
+  </tr>
+</table>
+
+<h2>9.3 Cronograma Estimado para Beta</h2>
+
+<table>
+  <tr><th>Fase</th><th>Duración estimada</th><th>Dependencias</th></tr>
+  <tr><td>Pre-Beta (Firestore rules, env vars, webhook)</td><td>2-3 días</td><td>Acceso a consola GCP + Meta Business</td></tr>
+  <tr><td>Pruebas internas</td><td>1 semana</td><td>Pre-Beta completado</td></tr>
+  <tr><td>Correcciones post-pruebas</td><td>3-5 días</td><td>Feedback de pruebas</td></tr>
+  <tr><td>Beta cerrada (invitación)</td><td>2 semanas</td><td>Correcciones aplicadas</td></tr>
+  <tr><td>Lanzamiento público</td><td>—</td><td>Beta exitosa</td></tr>
+</table>
+
+<div class="callout callout-warning">
+  <strong>Riesgo identificado:</strong> La configuración del webhook de WhatsApp en
+  producción requiere que el servidor tenga HTTPS con certificado válido y que el
+  número de teléfono esté verificado en Meta Business Platform. Se recomienda
+  iniciar este proceso cuanto antes.
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+
+<div class="footnote">
+  <p><strong>Novent App</strong> — Informe Ejecutivo Sprint 1.6-1.7 — Julio 2026</p>
+  <p>Documento confidencial. Prohibida su distribución sin autorización.</p>
+  <p>Para más información: <em>info@novent.app</em></p>
+</div>
+
+</body>
+</html>

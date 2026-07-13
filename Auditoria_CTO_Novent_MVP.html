@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novent — Auditoría CTO MVP</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0f; color: #e4e4e7; line-height: 1.7; }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+  
+  /* Portada */
+  .portada { text-align: center; padding: 120px 0 80px; }
+  .portada h1 { font-size: 80px; font-weight: 900; letter-spacing: -3px; background: linear-gradient(135deg,#fff 40%,#a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .portada .sub { font-size: 28px; color: #a1a1aa; margin-top: 16px; }
+  .portada .tag { font-size: 20px; color: #22c55e; font-style: italic; margin-top: 8px; }
+  .portada .meta { margin-top: 40px; color: #71717a; font-size: 15px; }
+  .portada .line { margin-top: 32px; border: none; height: 1px; background: linear-gradient(90deg,transparent,#a855f7,transparent); }
+
+  /* Secciones */
+  h2 { font-size: 32px; font-weight: 900; margin: 56px 0 24px; letter-spacing: -1px; color: #fff; }
+  h2 .badge { font-size: 14px; font-weight: 600; padding: 4px 12px; border-radius: 999px; margin-left: 12px; vertical-align: middle; }
+  h3 { font-size: 20px; font-weight: 700; margin: 32px 0 12px; color: #f4f4f5; }
+  
+  p { margin-bottom: 16px; color: #d4d4d8; font-size: 15px; }
+  .lead { font-size: 17px; color: #e4e4e7; line-height: 1.8; margin-bottom: 24px; }
+
+  /* Cards de bugs */
+  .bug-card { background: #18181b; border: 1px solid #27272a; border-radius: 16px; padding: 20px 24px; margin-bottom: 16px; }
+  .bug-card.critico { border-left: 4px solid #ef4444; }
+  .bug-card.alta { border-left: 4px solid #f97316; }
+  .bug-card .id { font-size: 13px; font-weight: 700; color: #a1a1aa; letter-spacing: 1px; }
+  .bug-card .id b { color: #ef4444; }
+  .bug-card h4 { font-size: 18px; font-weight: 700; margin: 4px 0 8px; color: #fff; }
+  .bug-card .meta { font-size: 13px; color: #71717a; }
+  .bug-card .meta span { display: inline-block; margin-right: 16px; }
+  .bug-card .meta .tag-time { background: #27272a; padding: 2px 10px; border-radius: 999px; }
+
+  /* Tabla */
+  table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; margin: 24px 0 32px; font-size: 14px; }
+  thead th { background: #18181b; color: #a1a1aa; font-weight: 600; text-align: left; padding: 14px 16px; border-bottom: 1px solid #27272a; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid #1f1f23; background: #101013; }
+  tbody tr:hover td { background: #18181b; }
+  .prio { font-weight: 700; }
+  .prio.critico { color: #ef4444; }
+  .prio.alta { color: #f97316; }
+  .prio.media { color: #eab308; }
+  .prio.baja { color: #3b82f6; }
+  .prio.futuro { color: #71717a; }
+  .tiempo { font-weight: 600; }
+  .tiempo.fast { color: #22c55e; }
+  .tiempo.med { color: #eab308; }
+  .tiempo.slow { color: #71717a; }
+
+  /* Listas */
+  ul { margin: 0 0 24px 24px; }
+  ul li { margin-bottom: 8px; color: #d4d4d8; font-size: 15px; }
+  ul li b { color: #fff; }
+
+  /* Top 10 */
+  .top-list { counter-reset: top; list-style: none; margin: 24px 0 32px; padding: 0; }
+  .top-list li { counter-increment: top; padding: 16px 20px; margin-bottom: 8px; background: #18181b; border: 1px solid #27272a; border-radius: 12px; display: flex; align-items: center; gap: 16px; font-size: 15px; }
+  .top-list li::before { content: counter(top); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; flex-shrink: 0; }
+  .top-list li:nth-child(-n+5)::before { background: #ef4444; color: #fff; }
+  .top-list li:nth-child(n+6):nth-child(-n+8)::before { background: #f97316; color: #fff; }
+  .top-list li:nth-child(n+9)::before { background: #3b82f6; color: #fff; }
+  .top-list li .time { margin-left: auto; font-size: 13px; background: #27272a; padding: 2px 12px; border-radius: 999px; color: #a1a1aa; white-space: nowrap; }
+
+  /* No hacer */
+  .no-list { list-style: none; padding: 0; }
+  .no-list li { padding: 12px 16px; margin-bottom: 6px; background: #18181b; border: 1px solid #27272a; border-radius: 10px; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+  .no-list li::before { content: "✕"; color: #ef4444; font-weight: 700; font-size: 18px; }
+
+  hr { border: none; height: 1px; background: linear-gradient(90deg,transparent,#27272a,transparent); margin: 48px 0; }
+
+  .footer { text-align: center; padding: 40px 0; color: #52525b; font-size: 13px; }
+
+  /* Score */
+  .score { background: #18181b; border: 1px solid #27272a; border-radius: 20px; padding: 32px; margin: 32px 0; text-align: center; }
+  .score .num { font-size: 72px; font-weight: 900; background: linear-gradient(135deg,#ef4444,#f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .score .label { font-size: 18px; color: #a1a1aa; margin-top: 4px; }
+  .score .desc { font-size: 15px; color: #71717a; margin-top: 12px; }
+
+  @media (max-width: 640px) {
+    .portada h1 { font-size: 48px; }
+    h2 { font-size: 24px; }
+    table { font-size: 12px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- PORTADA -->
+  <div class="portada">
+    <div style="font-size:60px;margin-bottom:16px;">🔍</div>
+    <h1>NOVENT</h1>
+    <div class="sub">Auditoría de MVP — CTO Assessment</div>
+    <div class="tag">¿Está Novent listo para producción?</div>
+    <hr class="line">
+    <div class="meta">
+      <div><strong>Fecha:</strong> Junio 2026</div>
+      <div style="margin-top:4px;">SaaS Multiempresa para pequeños negocios</div>
+    </div>
+  </div>
+
+  <!-- RESUMEN -->
+  <h2>Resumen Ejecutivo</h2>
+  <p class="lead">Novent es un SaaS multiempresa con Next.js 16 + Firebase. Tiene UI atractiva, estructura de datos sólida (<code>companies/{id}/clientes</code>, ventas, inventario) y los módulos core esbozados. <strong style="color:#ef4444;">Pero NO es un MVP comercializable.</strong> Hay bugs críticos que rompen auth, navegación y registro. La seguridad es inexistente (sin Firestore Rules). Funcionalidades clave incompletas.</p>
+
+  <div class="score">
+    <div class="num">40%</div>
+    <div class="label">Puntaje de readiness</div>
+    <div class="desc">Con ~3 semanas de trabajo enfocado sería piloteable con 1-2 negocios reales.</div>
+  </div>
+
+  <hr>
+
+  <!-- 1. BUGS CRÍTICOS -->
+  <h2>1. Bugs Críticos <span class="badge" style="background:#ef444420;color:#ef4444;">Prohiben producción</span></h2>
+  <p>Estos bugs <strong style="color:#ef4444;">IMPIDEN el uso en producción</strong>. Deben resolverse antes de cualquier otro trabajo.</p>
+
+  <div class="bug-card critico">
+    <div class="id"><b>C1</b> · Cookie name mismatch</div>
+    <h4>Middleware auth nunca funciona</h4>
+    <p><code>saveSession()</code> escribe la cookie como <code>'firebase-auth-token'</code> pero el middleware lee <code>'token'</code>. El guard de rutas protegidas NUNCA funciona — cualquiera accede a /dashboard sin autenticación.</p>
+    <div class="meta"><span>📁 <code>lib/authToken.ts:11</code> vs <code>middleware.ts:23</code></span><span class="tag-time">⏱ 15 min</span></div>
+  </div>
+
+  <div class="bug-card critico">
+    <div class="id"><b>C2</b> · Archivo mal nombrado</div>
+    <h4><code>pge.tsx</code> en vez de <code>page.tsx</code></h4>
+    <p>Next.js requiere <code>page.tsx</code> para rutas dinámicas. El detalle de cliente en <code>/clientes/[id]</code> produce <strong>404</strong>.</p>
+    <div class="meta"><span>📁 <code>app/clientes/[id]/pge.tsx</code></span><span class="tag-time">⏱ 5 min</span></div>
+  </div>
+
+  <div class="bug-card critico">
+    <div class="id"><b>C3</b> · Link roto</div>
+    <h4>Login → Signup no funciona</h4>
+    <p>El login navega a <code>/signup</code> pero la carpeta se llama <code>singup</code> (sin la 'i'). La ruta real es <code>/singup</code>. Error 404 al intentar registrarse.</p>
+    <div class="meta"><span>📁 <code>app/login/page.tsx:116</code> → <code>/signup</code> vs <code>app/singup/</code></span><span class="tag-time">⏱ 5 min</span></div>
+  </div>
+
+  <div class="bug-card critico">
+    <div class="id"><b>C4</b> · Seguridad</div>
+    <h4>Sin Firestore Security Rules</h4>
+    <p>Cualquier usuario autenticado puede leer y escribir <strong>TODOS</strong> los datos de <strong>TODAS</strong> las empresas. No existe aislamiento multiempresa. Es el riesgo más grave.</p>
+    <div class="meta"><span>📁 Proyecto completo</span><span class="tag-time">⏱ 4 h</span></div>
+  </div>
+
+  <div class="bug-card critico">
+    <div class="id"><b>C5</b> · Exposición de datos</div>
+    <h4>Password sin <code>type="password"</code> en signup</h4>
+    <p>El input de contraseña en el formulario de registro <strong>muestra la contraseña en texto plano</strong> al escribir.</p>
+    <div class="meta"><span>📁 <code>app/singup/page.tsx:128-132</code></span><span class="tag-time">⏱ 2 min</span></div>
+  </div>
+
+  <div class="bug-card critico">
+    <div class="id"><b>C6</b> · Configuración</div>
+    <h4>Firebase config hardcodeada</h4>
+    <p>API key, authDomain, projectId están hardcodeados en el bundle cliente. Sin <code>.env</code> ni variables de entorno.</p>
+    <div class="meta"><span>📁 <code>lib/firebase.ts:5-12</code></span><span class="tag-time">⏱ 30 min</span></div>
+  </div>
+
+  <hr>
+
+  <!-- 2. BUGS IMPORTANTES -->
+  <h2>2. Bugs Importantes</h2>
+  <ul>
+    <li><b>B1</b> — Servicios hardcodeados en ventas (solo barbería, no configurable para ferretería)</li>
+    <li><b>B2</b> — Sin archivo <code>.env</code></li>
+    <li><b>B3</b> — <code>notifiactions.tsx</code> con typo y fuera de ruta</li>
+    <li><b>B4</b> — <code>dashboard/DashboardLayout.tsx</code> existe pero nunca se importa (código muerto)</li>
+    <li><b>B5</b> — <code>DashboardLayout.tsx</code> referencia <code>/dashboard/clientes</code> que no existe</li>
+    <li><b>B6</b> — Eliminar venta no revierte <code>totalGastado</code> ni <code>visitas</code> del cliente</li>
+    <li><b>B7</b> — Sin validación de email ni contraseña en signup</li>
+    <li><b>B8</b> — Map de pricing sin key estable (usa índice <code>i</code>)</li>
+  </ul>
+
+  <!-- 3. MEJORAS UX -->
+  <h2>3. Mejoras de UX</h2>
+  <ul>
+    <li><b>UX1</b> — Sin indicador de carga en botones de formularios</li>
+    <li><b>UX2</b> — Sin confirmación antes de eliminar (cliente, venta, producto)</li>
+    <li><b>UX3</b> — Selects nativos sin estilo (no usan shadcn/ui)</li>
+    <li><b>UX4</b> — Sin feedback cuando búsqueda no encuentra resultados</li>
+    <li><b>UX5</b> — Inputs sin etiquetas accesibles (aria-labels, labels)</li>
+    <li><b>UX6</b> — <code>&lt;html lang="en"&gt;</code> pero toda la app está en español</li>
+    <li><b>UX7</b> — Links <code>#features</code>, <code>#pricing</code> en landing no llevan a ningún lado</li>
+    <li><b>UX8</b> — Sin botón de cerrar sesión en el layout principal</li>
+  </ul>
+
+  <!-- 4. RENDIMIENTO -->
+  <h2>4. Mejoras de Rendimiento</h2>
+  <ul>
+    <li><b>R1</b> — <code>onSnapshot</code> se suscribe aunque usuario no tenga company</li>
+    <li><b>R2</b> — Firebase init en bundle principal sin importar auth</li>
+    <li><b>R3</b> — Recharts sin <code>dynamic import</code></li>
+    <li><b>R4</b> — Sin paginación Firestore (problema con 10k+ registros)</li>
+  </ul>
+
+  <!-- 5. SEGURIDAD -->
+  <h2>5. Mejoras de Seguridad</h2>
+  <ul>
+    <li><b>S1</b> — Firestore Security Rules con validación por <code>companyId</code></li>
+    <li><b>S2</b> — Variables de entorno (<code>.env.local</code>) para Firebase</li>
+    <li><b>S3</b> — Firebase App Check para rate limiting</li>
+    <li><b>S4</b> — Verificación de email obligatoria</li>
+    <li><b>S5</b> — Sistema de roles (admin / staff)</li>
+    <li><b>S6</b> — Registro de auditoría (login, IP, dispositivo)</li>
+  </ul>
+
+  <!-- 6. FUNCIONALIDADES INCOMPLETAS -->
+  <h2>6. Funcionalidades Incompletas</h2>
+  <ul>
+    <li><b>F1</b> — <strong>WhatsApp:</strong> placeholder de 1 línea. Sin integración real.</li>
+    <li><b>F2</b> — <strong>Inventario ↔ Ventas:</strong> no hay integración. Vender no descuenta stock.</li>
+    <li><b>F3</b> — <strong>Notificaciones:</strong> data estática hardcodeada. No hay sistema real.</li>
+    <li><b>F4</b> — <strong>Clientes:</strong> sin email, dirección, notas, etiquetas.</li>
+    <li><b>F5</b> — <strong>Ventas:</strong> sin descuentos, pagos parciales, métodos de pago, factura.</li>
+    <li><b>F6</b> — <strong>Dashboard:</strong> sin selector de fechas, exportación, comparativas.</li>
+    <li><b>F7</b> — <strong>Perfil de usuario:</strong> no existe. Nombre "Samuel" hardcodeado.</li>
+  </ul>
+
+  <!-- 7. FUNCIONALIDADES TERMINADAS -->
+  <h2>7. Funcionalidades Terminadas  <span class="badge" style="background:#22c55e20;color:#22c55e;">✓ Funcional</span></h2>
+  <ul>
+    <li><b>T1</b> — Login con email/password + cookie de sesión</li>
+    <li><b>T2</b> — Signup con creación de empresa + user</li>
+    <li><b>T3</b> — CRUD de clientes en tiempo real con KPIs</li>
+    <li><b>T4</b> — POS básico: seleccionar cliente → servicio → registrar venta (actualiza CRM)</li>
+    <li><b>T5</b> — CRUD de inventario con alerta de stock bajo</li>
+    <li><b>T6</b> — Dashboard con KPIs, gráficas (barras + pie) y feed en vivo</li>
+    <li><b>T7</b> — Detalle de cliente con historial de ventas</li>
+    <li><b>T8</b> — Middleware de auth (conceptualmente correcto, aunque roto)</li>
+    <li><b>T9</b> — Landing page atractiva con pricing y CTAs</li>
+    <li><b>T10</b> — Arquitectura multiempresa en Firestore</li>
+  </ul>
+
+  <hr>
+
+  <!-- TABLA PRIORIZADA -->
+  <h2>Tabla Priorizada de Acciones</h2>
+  <table>
+    <thead>
+      <tr><th>Prioridad</th><th>Módulo</th><th>Problema</th><th>Impacto</th><th>Tiempo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="prio critico">CRÍTICO</td><td>Auth</td><td>Cookie name mismatch</td><td>Seguridad 0</td><td class="tiempo fast">15 min</td></tr>
+      <tr><td class="prio critico">CRÍTICO</td><td>Seguridad</td><td>Sin Firestore Rules</td><td>Datos expuestos</td><td class="tiempo med">4 h</td></tr>
+      <tr><td class="prio critico">CRÍTICO</td><td>Clientes</td><td>pge.tsx → page.tsx</td><td>Ruta muerta</td><td class="tiempo fast">5 min</td></tr>
+      <tr><td class="prio critico">CRÍTICO</td><td>Signup</td><td>Link /signup vs /singup</td><td>No registra</td><td class="tiempo fast">5 min</td></tr>
+      <tr><td class="prio critico">CRÍTICO</td><td>Signup</td><td>Password sin type</td><td>Exposición</td><td class="tiempo fast">2 min</td></tr>
+      <tr><td class="prio alta">ALTA</td><td>Ventas</td><td>Servicios hardcodeados</td><td>No personalizable</td><td class="tiempo med">4 h</td></tr>
+      <tr><td class="prio alta">ALTA</td><td>Infra</td><td>Firebase hardcodeada</td><td>Riesgo</td><td class="tiempo fast">30 min</td></tr>
+      <tr><td class="prio alta">ALTA</td><td>Auth</td><td>Sin .env</td><td>Mala práctica</td><td class="tiempo fast">15 min</td></tr>
+      <tr><td class="prio media">MEDIA</td><td>Inventario</td><td>Stock no descuenta al vender</td><td>Inconsistente</td><td class="tiempo med">3 h</td></tr>
+      <tr><td class="prio media">MEDIA</td><td>Ventas</td><td>Eliminar no revierte CRM</td><td>Inconsistente</td><td class="tiempo med">2 h</td></tr>
+      <tr><td class="prio media">MEDIA</td><td>UX</td><td>Sin confirmación eliminar</td><td>Pérdida datos</td><td class="tiempo med">4 h</td></tr>
+      <tr><td class="prio media">MEDIA</td><td>Notifs</td><td>Sin sistema real</td><td>Feature falta</td><td class="tiempo slow">8 h</td></tr>
+      <tr><td class="prio media">MEDIA</td><td>UI</td><td>Layout muerto</td><td>Código basura</td><td class="tiempo fast">15 min</td></tr>
+      <tr><td class="prio baja">BAJA</td><td>UX</td><td>Sin loading</td><td>Mala experiencia</td><td class="tiempo med">2 h</td></tr>
+      <tr><td class="prio baja">BAJA</td><td>UX</td><td>Sin labels</td><td>Inaccesible</td><td class="tiempo med">1 h</td></tr>
+      <tr><td class="prio baja">BAJA</td><td>Layout</td><td>lang="en" en español</td><td>Error menor</td><td class="tiempo fast">2 min</td></tr>
+      <tr><td class="prio baja">BAJA</td><td>Perf</td><td>Sin paginación</td><td>10k+ registros</td><td class="tiempo med">4 h</td></tr>
+      <tr><td class="prio futuro">FUTURO</td><td>WhatsApp</td><td>Placeholder</td><td>No usable</td><td class="tiempo slow">16 h+</td></tr>
+      <tr><td class="prio futuro">FUTURO</td><td>Roles</td><td>Sin roles</td><td>Limitante</td><td class="tiempo slow">8 h</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- CONCLUSIONES -->
+  <h2>Conclusiones</h2>
+
+  <h3>¿Novent ya es un MVP?</h3>
+  <p><strong style="color:#ef4444;">No.</strong> No es un MVP usable en producción.</p>
+  <p>Tiene la <strong>apariencia</strong> de un MVP (UI bonita, landing page, estructura multiempresa), pero tiene bugs críticos que lo rompen completamente:</p>
+  <ul>
+    <li>❌ El middleware auth no funciona — cualquiera accede a rutas protegidas</li>
+    <li>❌ El detalle de cliente no carga — <code>pge.tsx</code> no es <code>page.tsx</code></li>
+    <li>❌ El registro no funciona — link <code>/signup</code> vs ruta <code>/singup</code></li>
+    <li>❌ No hay security rules — base de datos abierta</li>
+    <li>❌ No hay integración stock-ventas — vender no descuenta inventario</li>
+    <li>❌ Servicios hardcodeados — solo funciona para barbería</li>
+  </ul>
+
+  <h3>¿Qué falta para 30 días de uso continuo?</h3>
+  <ul>
+    <li>✅ Corregir los <strong>6 bugs críticos</strong> (innegociable)</li>
+    <li>✅ Hacer <strong>configurables</strong> los servicios/productos</li>
+    <li>✅ Integrar <strong>inventario con ventas</strong> (descuento de stock)</li>
+    <li>✅ Agregar <strong>confirmaciones</strong> antes de eliminar</li>
+    <li>✅ <strong>Firestore Security Rules</strong> básicas (scope por companyId)</li>
+    <li>✅ <strong>Logout</strong> visible en el layout</li>
+    <li>✅ <strong>Estabilidad básica</strong> — que no pierda datos</li>
+  </ul>
+
+  <h3>Top 10 tareas a hacer primero</h3>
+  <ol class="top-list">
+    <li>Renombrar <code>pge.tsx</code> → <code>page.tsx</code> <span class="time">5 min</span></li>
+    <li>Renombrar carpeta <code>singup</code> → <code>signup</code> <span class="time">5 min</span></li>
+    <li>Fijar cookie name (middleware o authToken) <span class="time">15 min</span></li>
+    <li>Agregar <code>type="password"</code> en signup <span class="time">2 min</span></li>
+    <li>Crear <code>.env.local</code> + mover Firebase a variables <span class="time">30 min</span></li>
+    <li>Escribir Firestore Security Rules básicas <span class="time">4 h</span></li>
+    <li>Hacer servicios configurables desde Firestore <span class="time">4 h</span></li>
+    <li>Integrar stock inventario → ventas <span class="time">3 h</span></li>
+    <li>Agregar confirmación antes de eliminar <span class="time">2 h</span></li>
+    <li>Agregar logout en sidebar del layout principal <span class="time">30 min</span></li>
+  </ol>
+
+  <h3>Tareas que NO haría todavía</h3>
+  <ul class="no-list">
+    <li>WhatsApp real (16 h+) — demasiado complejo para MVP</li>
+    <li>Notificaciones push — nice-to-have, no MVP</li>
+    <li>Paginación Firestore — no es problema hasta 500+ registros</li>
+    <li>Roles multi-usuario — MVP es 1 negocio con 1 dueño</li>
+    <li>Facturación electrónica — depende del país y regulación</li>
+    <li>Exportación PDF/CSV — no esencial primeros 30 días</li>
+    <li>Tema claro/oscuro — ya tiene dark mode</li>
+    <li>Tests automatizados — primero que funcione</li>
+  </ul>
+
+  <hr>
+
+  <div class="footer">
+    <p>Documento generado el 5 de Junio, 2026</p>
+    <p>Auditoría realizada por agente CTO — Análisis completo del código fuente de Novent</p>
+  </div>
+
+</div>
+</body>
+</html>
