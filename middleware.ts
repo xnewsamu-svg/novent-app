@@ -9,6 +9,8 @@ const publicRoutes = [
   "/",
   "/api/webhooks/whatsapp",
   "/api/cron/process-jobs",
+  "/api/company/check-name",
+  "/api/auth/signup",
 ]
 
 export function middleware(request: NextRequest) {
